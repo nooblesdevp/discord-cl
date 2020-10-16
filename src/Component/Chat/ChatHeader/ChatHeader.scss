@@ -1,0 +1,48 @@
+@mixin dFlexSb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatHeader {
+  @include dFlexSb();
+  padding: 10px;
+}
+.chatHeader__left {
+  h3 {
+    display: flex;
+    align-items: center;
+    color: white;
+    span {
+      color: gray;
+      padding: 10px;
+    }
+  }
+}
+.chatHeader__right {
+  @include dFlexSb();
+  flex: 0.5;
+  color: gray;
+  padding: 10px;
+  .MuiSvgIcon-root {
+    padding: 5px;
+    cursor: pointer;
+    &:hover {
+      color: white;
+    }
+  }
+  .chatHeader__right {
+    display: flex;
+    align-items: center;
+    color: gray;
+    background: #2f3135;
+    border-radius: 3px;
+    padding: 3px;
+    input {
+      background: transparent;
+      outline: none;
+      color: white;
+      border: none;
+    }
+  }
+}
