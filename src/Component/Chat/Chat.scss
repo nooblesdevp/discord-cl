@@ -41,5 +41,14 @@
         display: none;
       }
     }
+
+    .MuiSvgIcon-root {
+      padding: 5px;
+      transition: 0.4s all ease;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+    }
   }
 }
