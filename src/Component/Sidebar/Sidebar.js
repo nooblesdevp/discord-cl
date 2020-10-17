@@ -1,4 +1,4 @@
-import { Avatar } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import {
   Add,
   Call,
@@ -81,7 +81,9 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar__profile">
-        <Avatar onClick={() => auth.signOut()} src={user.photo} />
+        <Button>
+          <Avatar onClick={() => auth.signOut()} src={user.photo} />
+        </Button>
         <div className="sidebar__profileInfo">
           <h3>{user.displayName} </h3>
           <p>#{user.uid.substring(0, 5)}</p>
