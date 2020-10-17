@@ -9,12 +9,40 @@ import {
   Settings,
   SignalCellularAlt,
 } from "@material-ui/icons";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
+import db, { auth } from "../../firebase/firebase";
 
 import "./Sidebar.scss";
 import SidebarChannel from "./SidebarChannel/SidebarChannel";
 
 function Sidebar() {
+  const user = useSelector(selectUser);
+  const [channels, setChannels] = useState([]);
+
+  useEffect(() => {
+    db.collection("channels").onSnapshot((snapshot) =>
+      setChannels(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          channel: doc.data(),
+        }))
+      )
+    );
+  }, []);
+
+  const handleAddChannel = () => {
+    const channelName = prompt("Enter a new channel name");
+
+    if (channelName) {
+      db.collection("channels").add({
+        channelName: channelName,
+      });
+    }
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__top">
@@ -28,14 +56,17 @@ function Sidebar() {
             <ExpandMore />
             <h4>Text Channel</h4>
           </div>
-          <Add className="sidebar__addChannel" />
+          <Add onClick={handleAddChannel} className="sidebar__addChannel" />
         </div>
 
         <div className="sidebar__channelsList">
-          <SidebarChannel />
-          <SidebarChannel />
-          <SidebarChannel />
-          <SidebarChannel />
+          {channels.map(({ id, channel }) => (
+            <SidebarChannel
+              key={id}
+              id={id}
+              channelName={channel.channelName}
+            />
+          ))}
         </div>
       </div>
       <div className="sidebar__voice">
@@ -50,10 +81,10 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar__profile">
-        <Avatar />
+        <Avatar onClick={() => auth.signOut()} src={user.photo} />
         <div className="sidebar__profileInfo">
-          <h3>nuzulzen </h3>
-          <p>thisIsMyId</p>
+          <h3>{user.displayName} </h3>
+          <p>#{user.uid.substring(0, 5)}</p>
         </div>
         <div className="sidebar__profileInfoIcons">
           <Mic />

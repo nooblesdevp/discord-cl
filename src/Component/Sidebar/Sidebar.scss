@@ -25,6 +25,7 @@ $bgColor: #2f3135;
     border-bottom: 3px solid #26282c;
   }
   .sidebar__channels {
+    text-transform: capitalize;
     flex: 1;
     .sidebar__addChannel {
       cursor: pointer;
@@ -53,6 +54,7 @@ $bgColor: #2f3135;
       padding: 10px;
       h3 {
         color: #4fb185;
+        font-size: 20px;
       }
       p {
         font-size: smaller;
@@ -76,6 +78,9 @@ $bgColor: #2f3135;
     .sidebar__profileInfo {
       flex: 1;
       padding: 10px;
+      h3 {
+        font-size: 17px;
+      }
     }
     .sidebar__profileInfoIcons {
       .MuiSvgIcon-root {

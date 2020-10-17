@@ -3,18 +3,18 @@ import React from "react";
 
 import "./Message.scss";
 
-function Message() {
+function Message({ timestamp, message, user }) {
   return (
     <div className="message">
-      <Avatar />
+      <Avatar src={user.photo} />
       <div className="message__info">
         <h4>
-          ian
+          {user.displayName}
           <span className="message__timestamp">
-            tthis is a message__timestamp
+            {new Date(timestamp?.toDate()).toUTCString()}
           </span>
         </h4>
-        <p>This is a message </p>
+        <p> {message} </p>
       </div>
     </div>
   );
